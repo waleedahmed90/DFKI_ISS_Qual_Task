@@ -53,10 +53,7 @@ def reshaping(frame,sc):
     
     (x,y) = frame.shape
     frame = frame.values
-    #
     frame=sc.fit_transform(frame)
-    #print(frame)
-    #print("hizza "+str(frame.shape))
     frame = frame.reshape(x,1,y)
     return frame
     
@@ -66,28 +63,13 @@ def ndArr_toMat(ndarr,sc):
     ndarr = ndarr.values
     (x,)=ndarr.shape
     ndarr = ndarr.reshape(-1,1)
-    #ndarr = sc.transform(ndarr)
     ndarr = sc.fit_transform(ndarr) 
-    #ndarr = ndarr.reshape(x,1,1)
-    #ndarr = ndarr.reshape(x,1)################################
     return ndarr
-
-
-    # ndarr = ndarr.values
-#     #print(ndarr.shape)
-#     (x,)=ndarr.shape
-#     ndarr = ndarr.reshape(x,-1)
-#     #
-#     ndarr= sc.transform(ndarr)
-#     #ndarr=sc.fit_transform(ndarr)
-#
-#     ####ndarr = ndarr.reshape(x,1)################################
-#     return ndarr
 
 ###FUNC###ndArray to a matrix
 def Plotter(orig, pred,sc):
     
-    #
+    #Inverse Transformation of the Scaled Values
     orig = sc.inverse_transform(orig)
     pred = sc.inverse_transform(pred) 
     
@@ -107,10 +89,10 @@ def Plotter(orig, pred,sc):
 def lstm_net(x_train, y_train, x_test, y_test):
     
     (dim_input,x,y) = x_train.shape
-    
-    print("yakh___"+str(x_train.shape))
-    print("bakh___"+str(x_train.shape[1:]))
-    
+       #
+    # print("yakh___"+str(x_train.shape))
+    # print("bakh___"+str(x_train.shape[1:]))
+    #
     
     #print(str(dim_input)+" "+str(x)+" "+str(y))
     model = Sequential()
@@ -133,8 +115,16 @@ def lstm_net(x_train, y_train, x_test, y_test):
     
     y_predict = model.predict(x_test)
     
-    print(model.summary())
     
+    
+    print(model.summary())
+    print("Dimensions: Training set x: "+"(Instances, Rows, Columns)"+str(x_train.shape))
+    print("Dimensions: Training set y: "+"(Rows, Columns)"+str(y_train.shape))
+    print("---------------------------------------------------")
+    print("Dimensions: Test set x: "+"(Instances, Rows, Columns)"+str(x_test.shape))
+    print("Dimensions: Tese set y: "+"(Rows, Columns)"+str(y_test.shape))
+    print("-----------------------------------------------")
+    print("Dimensions: Prediction set y: (Rows, Columns)"+str(y_predict.shape))
     return y_predict
 
 
@@ -165,15 +155,15 @@ x_test = reshaping(x_test,sc)
 y_train = ndArr_toMat(y_train,sc)
 y_test = ndArr_toMat(y_test,sc)
 
-print(y_train.shape)
-print(y_test.shape)
+# print(y_train.shape)
+# print(y_test.shape)
 
 ###Training the Neural Net and getting predictions
 
 y_predict = lstm_net(x_train, y_train, x_test, y_test)
 
-print(y_predict)
-print(y_test)
+# print(y_predict)
+# print(y_test)
 
 
 
