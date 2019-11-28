@@ -89,16 +89,12 @@ def Plotter(orig, pred,sc):
 def lstm_net(x_train, y_train, x_test, y_test):
     
     (dim_input,x,y) = x_train.shape
-       #
-    # print("yakh___"+str(x_train.shape))
-    # print("bakh___"+str(x_train.shape[1:]))
-    #
-    
+
     #print(str(dim_input)+" "+str(x)+" "+str(y))
     model = Sequential()
     model.add(LSTM(units = 128, activation='relu', return_sequences = True, input_shape = (x_train.shape[1:])))#org1
     #model.add(BatchNormalization())
-    model.add(Dropout(0.2))
+    #model.add(Dropout(0.2))
 
     model.add(LSTM(units=128, activation='relu'))#org2
     #model.add(BatchNormalization())
