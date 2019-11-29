@@ -104,7 +104,7 @@ def lstm_net(x_train, y_train, x_test, y_test):
     #model.add(BatchNormalization())
     #model.add(Dropout(0.2))
 
-    model.compile(optimizer = 'adam', loss = 'mean_squared_error')
+    model.compile(optimizer = 'adam', loss = 'mean_squared_error', metrics=['mse'])
 
     model.fit(x_train, y_train, epochs = 100, batch_size = dim_input, validation_data = (x_test, y_test))
     #model.fit(x_train, y_train, epochs = 100, batch_size = 32, validation_data = (x_test, y_test))
